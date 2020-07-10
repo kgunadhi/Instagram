@@ -10,8 +10,14 @@
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
+#import "ComposeViewController.h"
+#import "Post.h"
+#import "PostCell.h"
 
-@interface HomeFeedViewController ()
+@interface HomeFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *posts;
 
 @end
 
@@ -19,7 +25,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tabBarController.delegate = self;
+    
+    [self fetchPosts];
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    if ([viewController.restorationIdentifier isEqual: @"ComposeNavigationController"]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *composeNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"ComposeNavigationController"];
+        [self presentViewController:composeNavigationController animated:true completion:nil];
+        return false;
+    }
+    return true;
+}
+
+- (void)fetchPosts {
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 20;
+
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+//            self.posts = (NSMutableArray *)[Post postsWithArray:posts];
+//            self.posts = (NSMutableArray *)posts;
+            self.posts = posts;
+            [self.tableView reloadData];
+            NSLog(@"Success fetching");
+        }
+        else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.posts.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    
+    cell.post = self.posts[indexPath.row];
+    
+    return cell;
 }
 
 - (IBAction)logoutUser:(id)sender {

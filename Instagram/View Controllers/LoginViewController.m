@@ -42,7 +42,7 @@
     [emptyAlert addAction:okAction];
     
     if ([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) {
-        [self presentViewController:emptyAlert animated:YES completion:^{}];
+        [self presentViewController:emptyAlert animated:YES completion:nil];
     } else {
         // call sign up function on the object
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
@@ -53,7 +53,7 @@
                                                                                     message:error.localizedDescription
                 preferredStyle:(UIAlertControllerStyleAlert)];
                 [errorAlert addAction:okAction];
-                [self presentViewController:errorAlert animated:YES completion:^{}];
+                [self presentViewController:errorAlert animated:YES completion:nil];
             } else {
                 NSLog(@"User registered successfully");
                 
@@ -78,7 +78,7 @@
                                                                   style:UIAlertActionStyleDefault
                                                                 handler:^(UIAlertAction * _Nonnull action) {}];
             [errorAlert addAction:okAction];
-            [self presentViewController:errorAlert animated:YES completion:^{}];
+            [self presentViewController:errorAlert animated:YES completion:nil];
         } else {
             NSLog(@"User logged in successfully");
             

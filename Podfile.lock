@@ -4,19 +4,26 @@ PODS:
     - Parse/Core (= 1.18.0)
   - Parse/Core (1.18.0):
     - Bolts/Tasks (= 1.9.1)
+  - Parse/UI (1.18.0):
+    - Parse/Core
+  - "UITextView+Placeholder (1.4.0)"
 
 DEPENDENCIES:
   - Parse
+  - Parse/UI
+  - "UITextView+Placeholder"
 
 SPEC REPOS:
   trunk:
     - Bolts
     - Parse
+    - "UITextView+Placeholder"
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
+  "UITextView+Placeholder": d7b0c400921f66523f3a85d74f774512e14f6502
 
-PODFILE CHECKSUM: 88bfd70e03431b10957b0619237ebda2f48800d0
+PODFILE CHECKSUM: d15a05e871df57af032a6486e9b1228006b38b88
 
 COCOAPODS: 1.9.3
