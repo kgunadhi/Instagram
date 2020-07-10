@@ -23,6 +23,10 @@
     // Do any additional setup after loading the view.
 }
 
+- (IBAction)onTap:(id)sender {
+    [self.view endEditing:YES];
+}
+
 - (IBAction)registerUser:(id)sender {
     // initialize a user object
     PFUser *newUser = [PFUser user];

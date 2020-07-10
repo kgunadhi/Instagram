@@ -7,6 +7,7 @@
 //
 
 #import "PostCell.h"
+#import "DateTools.h"
 
 @implementation PostCell
 
@@ -26,11 +27,13 @@
     
     self.usernameLabel.text = post.author.username;
     self.usernameLabel2.text = post.author.username;
+    self.timestampLabel.text = post.createdAt.timeAgoSinceNow;
+    
     self.photoView.file = post.image;
     [self.photoView loadInBackground];
     
     // pad caption to start after username
-    NSString *padding = [@"" stringByPaddingToLength:([post.author.username length] * 2 + 2) withString:@" " startingAtIndex:0];
+    NSString *padding = [@"" stringByPaddingToLength:(([self.post.author.username length] + 1) * 2) withString:@" " startingAtIndex:0];
     self.captionLabel.text = [padding stringByAppendingString:post.caption];
     [self.captionLabel sizeToFit];
 }

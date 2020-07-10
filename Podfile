@@ -9,5 +9,6 @@ target 'Instagram' do
   pod 'Parse'
   pod 'Parse/UI'
   pod 'UITextView+Placeholder'
+  pod 'DateTools'
 
 end

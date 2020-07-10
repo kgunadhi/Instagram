@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *commentCount;
 
 + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;
-+ (NSMutableArray *)postsWithArray:(NSArray *)dictionaries;
 
 @end
 

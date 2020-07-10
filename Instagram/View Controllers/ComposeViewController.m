@@ -67,7 +67,7 @@
 }
 
 - (IBAction)sharePost:(id)sender {
-    UIImage *resizedImage = [self resizeImage:self.postView.image withSize: CGSizeMake(300, 300)];
+    UIImage *resizedImage = [self resizeImage:self.postView.image withSize: CGSizeMake(500, 500)];
     [Post postUserImage:resizedImage withCaption:self.captionView.text withCompletion:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Success");

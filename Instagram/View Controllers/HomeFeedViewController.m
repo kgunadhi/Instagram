@@ -13,6 +13,7 @@
 #import "ComposeViewController.h"
 #import "Post.h"
 #import "PostCell.h"
+#import "DetailsViewController.h"
 
 @interface HomeFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate>
 
@@ -57,7 +58,7 @@
 
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
-            self.posts = [Post postsWithArray:posts];
+            self.posts = posts;
             [self.tableView reloadData];
             NSLog(@"Success fetching");
         }
@@ -90,14 +91,17 @@
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {}];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    // Details view segue
+    UITableViewCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    Post *post = self.posts[indexPath.row];
+    
+    DetailsViewController *detailsViewController = [segue destinationViewController];
+    detailsViewController.post = post;
 }
-*/
 
 @end

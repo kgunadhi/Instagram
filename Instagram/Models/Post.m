@@ -18,25 +18,6 @@
 @dynamic likeCount;
 @dynamic commentCount;
 
-- (instancetype)initWithDictionary:(PFObject *)dictionary {
-    self = [super init];
-    
-    self.author = dictionary[@"author"];
-    self.caption = dictionary[@"caption"];
-    self.image = dictionary[@"image"];
-    
-    return self;
-}
-
-+ (NSMutableArray *)postsWithArray:(NSArray *)dictionaries {
-    NSMutableArray *posts = [NSMutableArray array];
-    for (PFObject *dictionary in dictionaries) {
-        Post *post = [[Post alloc] initWithDictionary:dictionary];
-        [posts addObject:post];
-    }
-    return posts;
-}
-
 + (nonnull NSString *)parseClassName {
     return @"Post";
 }
