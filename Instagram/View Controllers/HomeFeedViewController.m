@@ -34,6 +34,7 @@
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    // present compose view modally
     if ([viewController.restorationIdentifier isEqual: @"ComposeNavigationController"]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UIViewController *composeNavigationController = [storyboard instantiateViewControllerWithIdentifier:@"ComposeNavigationController"];
@@ -51,9 +52,7 @@
 
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
-//            self.posts = (NSMutableArray *)[Post postsWithArray:posts];
-//            self.posts = (NSMutableArray *)posts;
-            self.posts = posts;
+            self.posts = [Post postsWithArray:posts];
             [self.tableView reloadData];
             NSLog(@"Success fetching");
         }

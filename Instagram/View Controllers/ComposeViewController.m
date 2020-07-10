@@ -23,10 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    UITextView *textView = [[UITextView alloc] init];
     self.captionView.placeholder = @"Write a caption...";
     self.captionView.placeholderColor = [UIColor lightGrayColor];
-//    self.captionView = textView;
 }
 
 - (IBAction)takePicture:(id)sender {
@@ -69,7 +67,7 @@
 }
 
 - (IBAction)sharePost:(id)sender {
-    UIImage *resizedImage = [self resizeImage:self.postView.image withSize: CGSizeMake(200, 200)];
+    UIImage *resizedImage = [self resizeImage:self.postView.image withSize: CGSizeMake(300, 300)];
     [Post postUserImage:resizedImage withCaption:self.captionView.text withCompletion:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Success");
