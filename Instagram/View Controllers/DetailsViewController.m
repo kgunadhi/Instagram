@@ -8,12 +8,14 @@
 
 #import "DetailsViewController.h"
 #import "DateTools.h"
+@import Parse;
 
 @interface DetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
+@property (strong, nonatomic) IBOutlet PFImageView *photoView;
 
 @end
 
@@ -24,6 +26,9 @@
     
     self.usernameLabel.text = self.post.author.username;
     self.timestampLabel.text = self.post.createdAt.shortTimeAgoSinceNow;
+    
+    self.photoView.file = self.post.image;
+    [self.photoView loadInBackground];
     
     // pad caption to start after username
     NSString *padding = [@"" stringByPaddingToLength:(([self.post.author.username length] + 1) * 2) withString:@" " startingAtIndex:0];
