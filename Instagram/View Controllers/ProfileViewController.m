@@ -38,8 +38,8 @@
 - (void)viewDidLayoutSubviews {
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     
-    layout.minimumInteritemSpacing = 2;
-    layout.minimumLineSpacing = 2;
+    layout.minimumInteritemSpacing = 1;
+    layout.minimumLineSpacing = 1;
     
     const CGFloat itemWidth = (self.collectionView.frame.size.width - layout.minimumInteritemSpacing * 2) / 3;
     const CGFloat itemHeight = itemWidth;
@@ -56,10 +56,6 @@
         if (posts) {
             self.posts = posts;
             [self.collectionView reloadData];
-            NSLog(@"Success fetching");
-        }
-        else {
-            NSLog(@"%@", error.localizedDescription);
         }
         [self.refreshControl endRefreshing];
     }];
@@ -83,7 +79,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Details view segue
-    UITableViewCell *tappedCell = sender;
+    UICollectionViewCell *tappedCell = sender;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
     Post *post = self.posts[indexPath.row];
     

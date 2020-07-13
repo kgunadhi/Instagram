@@ -68,19 +68,12 @@
 
 - (IBAction)sharePost:(id)sender {
     UIImage *resizedImage = [self resizeImage:self.postView.image withSize: CGSizeMake(500, 500)];
-    [Post postUserImage:resizedImage withCaption:self.captionView.text withCompletion:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Success");
-        }
-        else {
-            NSLog(@"%@", error.localizedDescription);
-        }
-    }];
+    [Post postUserImage:resizedImage withCaption:self.captionView.text withCompletion:^(BOOL succeeded, NSError *error) {}];
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (IBAction)cancelPost:(id)sender {
-        [self dismissViewControllerAnimated:true completion:nil];
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 /*

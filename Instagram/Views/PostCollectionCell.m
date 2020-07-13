@@ -14,6 +14,7 @@
 - (void)setPost:(Post *)post {
     // Set underlying private storage _movie since replacing default setter
     _post = post;
+    
     self.photoView.image = nil;
     self.photoView.file = post.image;
     [self.photoView loadInBackground];

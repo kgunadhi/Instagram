@@ -62,8 +62,6 @@
                 [errorAlert addAction:okAction];
                 [self presentViewController:errorAlert animated:YES completion:nil];
             } else {
-                NSLog(@"User registered successfully");
-                
                 [self performSegueWithIdentifier:@"loginSegue" sender:nil];
             }
         }];
@@ -76,8 +74,6 @@
     
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
-            NSLog(@"User log in failed: %@", error.localizedDescription);
-            
             UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Login Error"
                                                                                 message:error.localizedDescription
             preferredStyle:(UIAlertControllerStyleAlert)];
@@ -87,8 +83,6 @@
             [errorAlert addAction:okAction];
             [self presentViewController:errorAlert animated:YES completion:nil];
         } else {
-            NSLog(@"User logged in successfully");
-            
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         }
     }];

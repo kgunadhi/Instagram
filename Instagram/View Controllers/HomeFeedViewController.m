@@ -60,10 +60,6 @@
         if (posts) {
             self.posts = posts;
             [self.tableView reloadData];
-            NSLog(@"Success fetching");
-        }
-        else {
-            NSLog(@"%@", error.localizedDescription);
         }
         [self.refreshControl endRefreshing];
     }];
